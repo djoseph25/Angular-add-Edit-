@@ -1,0 +1,62 @@
+<div class="main" *ngFor="let contact of contacts;let i = index">
+
+<form [formGroup]="addForm" #myForm>
+
+  <p>Name: {{contact.name}}</p>
+  <br>
+<!--Address section-->
+      <div  class="address-sec">
+        <p id="addr">Addresses1</p>
+        <br>
+        <table style="width:100%" *ngFor="let addr of contact.addresses">
+            <tr>
+                <td>
+                  <div id="field-type">
+                      <mat-chip-list>
+                        <mat-chip color="primary" (click)="selectAddr(addr)" selected>{{addr.addressType}}</mat-chip>
+                      </mat-chip-list>
+                  </div>
+                </td>
+                <td>
+                    <div class="field-data">
+                   {{addr.city}}-{{addr.postalCode}}
+                </div>
+                  </td>
+                <td>
+                    <div class="field-data">
+                    <b>Delete</b>
+                   </div>
+                </td>
+            </tr>
+          </table>
+        <hr>
+        <br>
+      </div>
+  <br>
+  <!--Address Section-->
+
+  <mat-form-field>
+    <mat-select formControlName="addressType" placeholder="Type" [(ngModel)]="newAttribute.addressType">
+        <mat-option *ngFor="let addressType of addresstypes" [value]="addressType.value">
+            {{addressType.viewValue}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+			
+<br>
+     
+<mat-form-field >
+    <input matInput formControlName="postalCode"  [(ngModel)]="newAttribute.postalCode"  placeholder="Postal Code" >
+</mat-form-field>
+<br>
+<mat-form-field >
+    <input matInput formControlName="city"  [(ngModel)]="newAttribute.city"  placeholder="City" >
+</mat-form-field>
+<br>
+
+     <br><br><br><br>
+        <button mat-flat-button    (click)="saveAddress(i,myForm)">Save</button>
+</form> 
+<br>
+<hr>
+</div>
